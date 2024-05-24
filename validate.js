@@ -1,76 +1,64 @@
-//Seu JavaScript de validação aqui
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('.formcontato__form');
+  const nome = document.getElementById('nome');
+  const email = document.getElementById('email');
+  const assunto = document.getElementById('assunto');
+  const mensagem = document.getElementById('mensagem');
 
-function validarForm(event) {
-    event.preventDefault();
+  form.addEventListener('submit', function(event) {
+      // Impede o envio do formulário
+      event.preventDefault();
 
+      // Remove mensagens de erro anteriores
+      const errorMessages = document.querySelectorAll('.error-message');
+      errorMessages.forEach(message => message.remove());
 
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const assunto = document.getElementById('assunto').value;
-    const mensagem = document.getElementById('mensagem').value;
+      // Variável para controlar se o formulário é válido
+      let isValid = true;
 
-    const nomeError = document.getElementById('name__error');
-    const emailError = document.getElementById('email__error');
-    const assuntoError = document.getElementById('assunto__error');
-    const mensagemError = document.getElementById('mensagem__error');
+      // Validação do campo Nome
+      if (nome.value.trim() === '') {
+          showError(nome, 'Por favor, insira seu nome.');
+          isValid = false;
+      }
 
-    nomeError.textContent = '';
-    emailError.textContent = '';
-    assuntoError.textContent = '';
-    mensagemError.textContent = '';
+      // Validação do campo Email
+      if (email.value.trim() === '') {
+          showError(email, 'Por favor, insira seu email.');
+          isValid = false;
+      } else if (!validateEmail(email.value.trim())) {
+          showError(email, 'Por favor, insira um email válido.');
+          isValid = false;
+      }
 
-    let formValido = true
-    
-    if(!nome || nome.length > 50) {
-        nomeError.textContent = 'O nome é obrigatório e deve ter no máximo 50 caracteres.'
-        formValido = false;
-    }
+      // Validação do campo Assunto
+      if (assunto.value.trim() === '') {
+          showError(assunto, 'Por favor, insira um assunto.');
+          isValid = false;
+      }
 
-    if (!email || !validarEmail(email)) {
-        emailError.textContent = 'Por favor, insira um email válido.';
-        formValido = false;
-    }
+      // Validação do campo Mensagem
+      if (mensagem.value.trim() === '') {
+          showError(mensagem, 'Por favor, insira sua mensagem.');
+          isValid = false;
+      }
 
-    if (!assunto || assunto.length > 50) {
-        assuntoError.textContent = 'O assunto é obrigatório e deve ter no máximo 50 caracteres.';
-        formValido = false;
-    }
+      // Se o formulário for válido, pode enviar
+      if (isValid) {
+          form.submit();
+      }
+  });
 
-    if (!mensagem || mensagem.length > 300) {
-        mensagemError.textContent = 'A mensagem é obrigatória e deve ter no máximo 300 caracteres.';
-        formValido = false;
-    }
+  function showError(input, message) {
+      const errorMessage = document.createElement('div');
+      errorMessage.className = 'error-message';
+      errorMessage.textContent = message;
+      input.parentElement.insertBefore(errorMessage, input.nextSibling);
+      input.classList.add('input-error');
+  }
 
-    if (formValido) {
-        console.log('Formulário válido. Enviando...');
-    } else {
-        const botaoEnviar = document.querySelector('.formcontato__botao');
-        botaoEnviar.disabled = true;
-    }
-}
-
-function validarEmail(email) {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(email);
-}
-
-function atualizarEstadoBotao() {
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const assunto = document.getElementById('assunto').value;
-    const mensagem = document.getElementById('mensagem').value;
-    const botaoEnviar = document.querySelector('.formcontato__botao');
-
-    if (nome && email && assunto && mensagem) {
-        botaoEnviar.disabled = false;
-    } else {
-        botaoEnviar.disabled = true;
-    }
-}
-
-document.getElementById('nome').addEventListener('input', atualizarEstadoBotao);
-document.getElementById('email').addEventListener('input', atualizarEstadoBotao);
-document.getElementById('assunto').addEventListener('input', atualizarEstadoBotao);
-document.getElementById('mensagem').addEventListener('input', atualizarEstadoBotao);
-
-document.querySelector('.formcontato__form').addEventListener('submit', validarForm);
+  function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+  }
+});

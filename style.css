@@ -5,9 +5,11 @@ coloque nas sessões indicadas*/
 :root{
     /*Insira a variavel das outras cores inspecionando o modelo do figma*/
     /*Se esforce para trabalhar com variáveis, é uma dica profissional valiosa*/
-   --cor-de-fundo: #F5F5F5;
+   --cor-de-fundo: #B2C8D9;
    --cor-de-link: #000;
    --cor-das-letras: #464646;
+   --cor-fundo-gradiente: #EAF2FD;
+   --cor-botao: #6ACCD9;
 }
 
 body {
@@ -24,6 +26,10 @@ ol, ul,li {
 a{
     text-decoration: none;
     color: var(--cor-de-link);
+}
+
+*{
+    scroll-behavior: smooth;
 }
 
 /*Neste desafio, gostariamos que praticassem a metodologia BEM, caso seintam a vontade 
@@ -91,6 +97,11 @@ section.title{
     gap: 22px;
 }
 
+.title__profile{
+    max-width: 368px;
+    border-radius: 180px;
+}
+
 .title__container{
     max-width: 751px;
 }
@@ -121,7 +132,7 @@ section.title{
 
 section.about{
     display: flex;
-    background-color: #EAF2FD;
+    background-color: var(--cor-fundo-gradiente);
     padding: 64px 0;
     justify-content: center;
     margin-bottom: 32px;
@@ -138,7 +149,7 @@ section.about{
 }
 
 .about__paragraph{
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     color: var(--cor-das-letras);
 }
@@ -181,6 +192,10 @@ section.about{
 
 .skills__name{
     margin-top: 8px;
+}
+
+.skill__name__1{
+    font-size: 10px ;
 }
 
 /*Sessão Hobbies*/
@@ -226,7 +241,7 @@ section.hobbies{
 /* Experiência Acadêmica*/
 
 section.academic{
-    background-color: #EAF2FD;
+    background-color: var(--cor-fundo-gradiente);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -251,8 +266,18 @@ section.academic{
     flex-direction: column;
 }
 
+.academic__courses__item__img img{
+    max-width: 368px;
+    height: 289px;
+}
 
+.academic__courses__item__title h4{
+    margin: 0.5rem 0rem; 
+}
 
+.academic__courses__item__subtitle p{
+    margin: 0.5rem 0rem;
+}
 
 .academic__courses__item__title{
     font-size: 22px;
@@ -324,7 +349,7 @@ section.experience{
 section.formcontato{
     display: flex;
     justify-content: center;
-    background-color: #EAF2FD;
+    background-color: var(--cor-fundo-gradiente);
     margin-top: 32px;
     padding: 64px;
 }
@@ -356,16 +381,13 @@ section.formcontato{
 
 .formcontato__form{
     display: flex;
-    gap: 32px;
+    gap: 16px;
 }
 
 .formcontato__input{
     height: 56px;
 }
 
-.formcontato__form .formcontato__input:not(){
-
-}
 
 .formcontato__botao{
     background-color: #2A7AE4;
@@ -389,6 +411,18 @@ section.footer{
 
 .footer__rodape p{
     margin: 0;
+}
+
+/* Validate */
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 1px;
+}
+
+.input-error {
+    border-color: red;
 }
 
 
@@ -505,6 +539,11 @@ section.academic{
     font-size: 16px;
 }
 
+.academic__courses__item__img img{
+    width: 224px;
+    height: 118px;
+}
+
 /*Expeirência profissional*/
 
 section.experience{
@@ -538,11 +577,11 @@ section.experience{
 /* Contato */
 
 .formcontato__contacto{
-
+    gap: 0px;
 }
-
 .formcontato__img{
     display: none;
+}
 }
 
 /*Mobile*/
@@ -617,6 +656,10 @@ section.about{
     gap: 16px;
 }
 
+.academic__courses__item__img img{
+    max-width: 296px;
+}
+
 /*Experiência Profissional*/
 
 .experience__img{
@@ -634,8 +677,14 @@ section.about{
 
 /*Contato*/
 
+section.formcontato{
+    padding: 32px
+}
 
+.formcontato__contacto{
+    gap: 0;
+}
 
 /*Footer*/
 
-}
+};
